@@ -1,11 +1,15 @@
 package me.zp4rker.discord.ryno;
 
 import me.zp4rker.discord.core.command.handler.CommandHandler;
+import me.zp4rker.discord.core.logger.ZLogger;
+import me.zp4rker.discord.ryno.commands.InfoCommand;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.AnnotatedEventManager;
+import net.dv8tion.jda.core.hooks.SubscribeEvent;
 
 import java.time.Instant;
 import java.util.concurrent.ExecutorService;
@@ -14,12 +18,14 @@ import java.util.concurrent.Executors;
 public class Ryno {
 
     private static JDA jda;
-    private static CommandHandler handler;
-    private static Instant startTime;
+    public static CommandHandler handler;
+    public static Instant startTime;
 
     public static ExecutorService async = Executors.newCachedThreadPool();
 
     public static void main(String[] args) throws Exception {
+        ZLogger.initialise();
+
         String token = args[0];
 
         handler = new CommandHandler("$");
@@ -33,6 +39,11 @@ public class Ryno {
         startTime = Instant.now();
 
         updateStatus();
+    }
+
+    @SubscribeEvent
+    private void onReady(ReadyEvent event) {
+        handler.registerCommand(new InfoCommand());
     }
 
     private static void updateStatus() {

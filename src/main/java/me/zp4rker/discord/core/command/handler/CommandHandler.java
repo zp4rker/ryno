@@ -1,6 +1,5 @@
 package me.zp4rker.discord.core.command.handler;
 
-import me.zp4rker.discord.core.command.RegisterCommand;
 import me.zp4rker.discord.core.exception.ExceptionHandler;
 import me.zp4rker.discord.ryno.Ryno;
 import net.dv8tion.jda.core.JDA;
@@ -40,7 +39,7 @@ public class CommandHandler {
         if (!commands.containsKey(splitContent[0].toLowerCase())) return;
 
         Command command = commands.get(splitContent[0].toLowerCase());
-        RegisterCommand annotation = command.getCommandAnnotation();
+        me.zp4rker.discord.core.command.Command annotation = command.getCommandAnnotation();
 
         if (event.getChannelType().equals(ChannelType.PRIVATE) && !annotation.directMessages()) return;
         if (event.getChannelType().equals(ChannelType.TEXT) && !annotation.channelMessages()) return;
@@ -58,7 +57,7 @@ public class CommandHandler {
      */
     public void registerCommand(Object command) {
         for (Method method : command.getClass().getMethods()) {
-            RegisterCommand annotation = method.getAnnotation(RegisterCommand.class);
+            me.zp4rker.discord.core.command.Command annotation = method.getAnnotation(me.zp4rker.discord.core.command.Command.class);
             if (annotation == null) continue;
 
             if (annotation.aliases().length == 0) {
@@ -156,17 +155,17 @@ public class CommandHandler {
 
     public class Command {
 
-        private final RegisterCommand annotation;
+        private final me.zp4rker.discord.core.command.Command annotation;
         private final Method method;
         private final Object executor;
 
-        Command(RegisterCommand annotation, Method method, Object executor) {
+        Command(me.zp4rker.discord.core.command.Command annotation, Method method, Object executor) {
             this.annotation = annotation;
             this.method = method;
             this.executor = executor;
         }
 
-        RegisterCommand getCommandAnnotation() {
+        me.zp4rker.discord.core.command.Command getCommandAnnotation() {
             return annotation;
         }
 

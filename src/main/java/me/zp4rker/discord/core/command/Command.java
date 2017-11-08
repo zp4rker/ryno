@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
  * @author ZP4RKER
  */
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RegisterCommand {
+public @interface Command {
 
     String[] aliases();
 
