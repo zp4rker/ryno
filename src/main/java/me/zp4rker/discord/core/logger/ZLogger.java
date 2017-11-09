@@ -21,25 +21,26 @@ public class ZLogger {
         } catch (Exception e) {
             logger.severe(e.getMessage());
         }
+        ZLogger.blankLine();
     }
 
     public static void info(String message) {
-        logger.info(message + "\n\n");
+        logger.info(message + "\n");
     }
 
     public static void warn(String message) {
-        logger.warning(message + "\n\n");
+        logger.warning(message + "\n");
     }
 
     public static void err(String message) {
-        logger.log(new CustomLevel("ERR", 1), message + "\n\n");
+        logger.log(new CustomLevel("ERR", 1), message + "\n");
     }
 
     public static void debug(String message) {
-        logger.log(new CustomLevel("DEBUG", 2), message + "\n\n");
+        logger.log(new CustomLevel("DEBUG", 2), message + "\n");
     }
 
-    public static void blankLine() {
+    private static void blankLine() {
         System.out.println();
     }
 

@@ -10,7 +10,7 @@ import java.awt.*;
 import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
-public class InfoCommand {
+public class Info {
 
     @Command(aliases = "info",
             description = "Displays information about the bot.",

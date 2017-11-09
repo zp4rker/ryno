@@ -1,8 +1,11 @@
 package me.zp4rker.discord.ryno;
 
 import me.zp4rker.discord.core.command.handler.CommandHandler;
+import me.zp4rker.discord.core.exception.ExceptionHandler;
 import me.zp4rker.discord.core.logger.ZLogger;
-import me.zp4rker.discord.ryno.commands.InfoCommand;
+import me.zp4rker.discord.ryno.commands.Info;
+import me.zp4rker.discord.ryno.lstnr.ReadyListener;
+import me.zp4rker.discord.ryno.util.PBClient;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -24,26 +27,26 @@ public class Ryno {
     public static ExecutorService async = Executors.newCachedThreadPool();
 
     public static void main(String[] args) throws Exception {
-        ZLogger.initialise();
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
-        String token = args[0];
+        String discordToken = args[0];
+        String pushbulletToken = args[1];
+
+        ZLogger.initialise();
+        PBClient.start(pushbulletToken);
 
         handler = new CommandHandler("$");
 
-        jda = new JDABuilder(AccountType.BOT).setToken(token)
+        jda = new JDABuilder(AccountType.BOT).setToken(discordToken)
                 .setEventManager(new AnnotatedEventManager())
                 .setBulkDeleteSplittingEnabled(false)
                 .addEventListener(handler)
+                .addEventListener(new ReadyListener())
                 .buildBlocking();
 
         startTime = Instant.now();
 
         updateStatus();
-    }
-
-    @SubscribeEvent
-    private void onReady(ReadyEvent event) {
-        handler.registerCommand(new InfoCommand());
     }
 
     private static void updateStatus() {
