@@ -3,16 +3,13 @@ package me.zp4rker.discord.ryno;
 import me.zp4rker.discord.core.command.handler.CommandHandler;
 import me.zp4rker.discord.core.exception.ExceptionHandler;
 import me.zp4rker.discord.core.logger.ZLogger;
-import me.zp4rker.discord.ryno.commands.Info;
 import me.zp4rker.discord.ryno.lstnr.ReadyListener;
-import me.zp4rker.discord.ryno.util.PBClient;
+import me.zp4rker.discord.core.util.PBClient;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.AnnotatedEventManager;
-import net.dv8tion.jda.core.hooks.SubscribeEvent;
 
 import java.time.Instant;
 import java.util.concurrent.ExecutorService;
@@ -33,7 +30,7 @@ public class Ryno {
         String pushbulletToken = args[1];
 
         ZLogger.initialise();
-        PBClient.start(pushbulletToken);
+        PBClient.setToken(pushbulletToken);
 
         handler = new CommandHandler("$");
 

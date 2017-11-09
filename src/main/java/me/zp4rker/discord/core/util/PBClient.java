@@ -1,6 +1,5 @@
-package me.zp4rker.discord.ryno.util;
+package me.zp4rker.discord.core.util;
 
-import me.zp4rker.discord.core.exception.ExceptionHandler;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONArray;
@@ -18,8 +17,11 @@ public class PBClient {
     private static String token;
     private static String latest = "";
 
-    public static void start(String token) {
+    public static void setToken(String token) {
         PBClient.token = token;
+    }
+
+    public static void start() {
         try {
             JSONArray pushes = getPushes("");
             if (pushes == null) return;
@@ -55,7 +57,7 @@ public class PBClient {
                     if (latest.getString("source_device_iden").equals("ujzkQhMD8LcsjAdCRXjVjU")) return;
 
                     // Handle recieved message
-                    String msg = latest.getString("body");
+                    //String msg = latest.getString("body");
                 }
 
                 @Override
