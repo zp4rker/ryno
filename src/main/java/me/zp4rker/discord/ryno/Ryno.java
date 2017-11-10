@@ -17,6 +17,8 @@ import java.util.concurrent.Executors;
 
 public class Ryno {
 
+    public static final String VERSION = "v1.0";
+
     private static JDA jda;
     public static CommandHandler handler;
     public static Instant startTime;
@@ -29,7 +31,6 @@ public class Ryno {
         String discordToken = args[0];
         String pushbulletToken = args[1];
 
-        ZLogger.initialise();
         PBClient.setToken(pushbulletToken);
 
         handler = new CommandHandler("$");
@@ -39,19 +40,7 @@ public class Ryno {
                 .setBulkDeleteSplittingEnabled(false)
                 .addEventListener(handler)
                 .addEventListener(new ReadyListener())
-                .buildBlocking();
-
-        startTime = Instant.now();
-
-        updateStatus();
-    }
-
-    private static void updateStatus() {
-        jda.getPresence().setGame(Game.of("$<command> | " + serverCount() + " servers."));
-    }
-
-    private static int serverCount() {
-        return jda.getGuilds().size();
+                .buildAsync();
     }
 
 }

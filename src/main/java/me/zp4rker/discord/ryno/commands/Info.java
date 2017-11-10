@@ -20,19 +20,22 @@ public class Info {
         String description = "An open-source utility bot.";
         String invite = "https://discordapp.com/oauth2/authorize?client_id=377404788071071744&scope=bot&permissions=8";
         String uptime = timeString(Ryno.startTime);
+        int commands = Ryno.handler.getCommands().size();
         int servers = message.getJDA().getGuilds().size();
         int users = message.getJDA().getUsers().size();
-        int commands = Ryno.handler.getCommands().size();
+
+        String desc = "**Author:** " + author + "\n";
+        desc += "**Version:** " + Ryno.VERSION + "\n";
+        desc +="**Description:** " + description + "\n";
+        desc += "**Commands:** " + commands + "\n";
+        desc += "**Servers:** " + servers + "\n";
+        desc += "**Users:** " + users + "\n";
 
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor("Ryno", invite, message.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .setFooter("Uptime: " + uptime + " | Click embed title for invite", null)
+                .setFooter("Uptime: " + uptime + " | Click embed title to invite me", null)
                 .setColor(Color.MAGENTA)
-                .addField("Author", author, true)
-                .addField("Description", description, true)
-                .addField("Servers", servers + "", true)
-                .addField("Users", users + "", true)
-                .addField("Commands", commands + "", true).build();
+                .setDescription(desc).build();
 
         message.getTextChannel().sendMessage(embed).queue();
     }
