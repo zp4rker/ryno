@@ -2,13 +2,11 @@ package me.zp4rker.discord.ryno;
 
 import me.zp4rker.discord.core.command.handler.CommandHandler;
 import me.zp4rker.discord.core.exception.ExceptionHandler;
-import me.zp4rker.discord.core.logger.ZLogger;
-import me.zp4rker.discord.ryno.lstnr.ReadyListener;
+import me.zp4rker.discord.ryno.listeners.Ready;
 import me.zp4rker.discord.core.util.PBClient;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.hooks.AnnotatedEventManager;
 
 import java.time.Instant;
@@ -39,7 +37,7 @@ public class Ryno {
                 .setEventManager(new AnnotatedEventManager())
                 .setBulkDeleteSplittingEnabled(false)
                 .addEventListener(handler)
-                .addEventListener(new ReadyListener())
+                .addEventListener(new Ready())
                 .buildAsync();
     }
 
