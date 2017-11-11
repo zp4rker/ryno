@@ -14,7 +14,7 @@ public class Info {
 
     @Command(aliases = "info",
             description = "Displays information about the bot.",
-            usage = "{prefix}info")
+            usage = "$info")
     public void onCommand(Message message) {
         String author = "ZP4RKER#3333";
         String description = "An open-source utility bot.";

@@ -1,8 +1,10 @@
 package me.zp4rker.discord.ryno.listeners;
 
+import me.zp4rker.discord.core.command.handler.CommandHandler;
 import me.zp4rker.discord.core.logger.ZLogger;
 import me.zp4rker.discord.ryno.Ryno;
 import me.zp4rker.discord.ryno.commands.Info;
+import me.zp4rker.discord.ryno.commands.Ping;
 import me.zp4rker.discord.ryno.commands.Restart;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.ReadyEvent;
@@ -27,9 +29,14 @@ public class Ready {
         event.getJDA().getPresence().setGame(Game.of("In Progress | " + event.getJDA().getGuilds().size() + " servers."));
 
         // Register commands
-        Ryno.handler.registerCommand(new Restart());
+        registerCommands(Ryno.handler);
+    }
 
-        Ryno.handler.registerCommand(new Info());
+    private void registerCommands(CommandHandler handler) {
+        handler.registerCommand(new Restart());
+
+        handler.registerCommand(new Info());
+        handler.registerCommand(new Ping());
     }
 
 }
