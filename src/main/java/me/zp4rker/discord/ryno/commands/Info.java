@@ -6,7 +6,6 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 
-import java.awt.*;
 import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +17,6 @@ public class Info {
     public void onCommand(Message message) {
         String author = "ZP4RKER#3333";
         String description = "An open-source utility bot.";
-        String invite = "https://discordapp.com/oauth2/authorize?client_id=377404788071071744&scope=bot&permissions=8";
         String uptime = timeString(Ryno.startTime);
         int commands = Ryno.handler.getCommands().size();
         int servers = message.getJDA().getGuilds().size();
@@ -32,9 +30,9 @@ public class Info {
         desc += "**Users:** " + users + "\n";
 
         MessageEmbed embed = new EmbedBuilder()
-                .setAuthor("Ryno", invite, message.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                .setAuthor("Ryno", null, message.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setFooter("Uptime: " + uptime + " | Click embed title to invite me", null)
-                .setColor(Color.MAGENTA)
+                .setColor(Ryno.embedColour)
                 .setDescription(desc).build();
 
         message.getTextChannel().sendMessage(embed).queue();

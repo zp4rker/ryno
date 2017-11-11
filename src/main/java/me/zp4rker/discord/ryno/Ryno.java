@@ -9,6 +9,7 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.hooks.AnnotatedEventManager;
 
+import java.awt.*;
 import java.time.Instant;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,6 +21,8 @@ public class Ryno {
     private static JDA jda;
     public static CommandHandler handler;
     public static Instant startTime;
+
+    public static Color embedColour = new Color(173, 69, 178);
 
     public static ExecutorService async = Executors.newCachedThreadPool();
 
