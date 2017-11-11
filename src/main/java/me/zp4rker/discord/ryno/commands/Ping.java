@@ -20,7 +20,7 @@ public class Ping {
                 m2.delete().queue();
                 m2.getChannel().sendMessage(new EmbedBuilder()
                         .setAuthor("Ping times", null, m2.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                        .setDescription("**API ping:** " + apiPing + "\n**Real ping:** " + realPing)
+                        .setDescription("**API ping:** " + apiPing + "ms\n**Real ping:** " + realPing + "ms")
                         .setColor(Ryno.embedColour).build()).queue();
             });
         });
