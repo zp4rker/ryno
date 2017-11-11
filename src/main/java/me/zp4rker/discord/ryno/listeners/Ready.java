@@ -24,7 +24,7 @@ public class Ready {
         Ryno.startTime = Instant.now();
 
         // Game status
-        event.getJDA().getPresence().setGame(Game.of("$<command> | " + event.getJDA().getGuilds().size() + " servers."));
+        event.getJDA().getPresence().setGame(Game.of("WIP | " + event.getJDA().getGuilds().size() + " servers."));
 
         // Register commands
         Ryno.handler.registerCommand(new Restart());
