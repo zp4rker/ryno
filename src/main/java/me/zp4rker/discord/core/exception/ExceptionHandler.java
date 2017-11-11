@@ -15,12 +15,12 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread t, Throwable e) {
         ZLogger.err("Encountered an exception! Sending stacktrace...");
-        PBClient.sendPush(PasteUtil.paste(getStackTrace(e)));
+        PBClient.sendPush("Uncaught Exception", PasteUtil.paste(getStackTrace(e)));
     }
 
-    public static void handleException(Exception e) {
+    public static void handleException(String issue, Exception e) {
         ZLogger.err("Encountered an exception! Sending stacktrace...");
-        PBClient.sendPush(PasteUtil.paste(getStackTrace(e)));
+        PBClient.sendPush(issue, PasteUtil.paste(getStackTrace(e)));
     }
 
     private static String getStackTrace(Throwable aThrowable) {

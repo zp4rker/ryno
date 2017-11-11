@@ -145,7 +145,7 @@ public class CommandHandler {
         try {
             m.invoke(command.getExecutor(), paramaters);
         } catch (Exception e) {
-            ExceptionHandler.handleException(e);
+            ExceptionHandler.handleException("Command Handler", e);
         }
     }
 

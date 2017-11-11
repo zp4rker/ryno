@@ -21,7 +21,7 @@ public class Restart {
 
             System.exit(0);
         } catch (Exception e) {
-            ExceptionHandler.handleException(e);
+            ExceptionHandler.handleException("Restart Command", e);
         }
     }
 

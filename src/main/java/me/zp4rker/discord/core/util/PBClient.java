@@ -106,7 +106,7 @@ public class PBClient {
         }
     }
 
-    public static void sendPush(String message) {
+    public static void sendPush(String title, String message) {
         try {
             URL url = new URL("https://api.pushbullet.com/v2/pushes");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -116,7 +116,7 @@ public class PBClient {
 
             con.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            wr.writeBytes("type=note&title=&body=" + message + "&source_device_iden=ujzkQhMD8LcsjAdCRXjVjU");
+            wr.writeBytes("type=note&title=" + title + "&body=" + message + "&source_device_iden=ujzkQhMD8LcsjAdCRXjVjU");
             wr.flush();
             wr.close();
 
