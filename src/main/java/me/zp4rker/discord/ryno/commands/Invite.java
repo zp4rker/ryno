@@ -19,9 +19,9 @@ public class Invite {
         desc += "**Server:** " + serverInvite + "\n";
 
         MessageEmbed embed = new EmbedBuilder()
-                .setAuthor("Invite links")
+                .setAuthor("Invite links", null, message.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setColor(Ryno.embedColour)
-                .setFooter("Made by ZP4RKER#3333", message.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                .setFooter("Made by ZP4RKER#3333", null)
                 .setDescription(desc).build();
 
         message.getChannel().sendMessage(embed).queue();
