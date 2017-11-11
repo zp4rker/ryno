@@ -17,7 +17,7 @@ public class Restart {
 
             message.getJDA().shutdown();
 
-            Runtime.getRuntime().exec("/home/bots/start-jitters.sh").waitFor();
+            Runtime.getRuntime().exec("/home/bots/start-ryno.sh").waitFor();
 
             System.exit(0);
         } catch (Exception e) {
