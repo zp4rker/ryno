@@ -6,7 +6,7 @@ import net.dv8tion.jda.core.entities.Message;
 
 public class Restart {
 
-    @Command(aliases = "restart", showInHelp = false)
+    @Command(aliases = "restart")
     public void onCommand(Message message) {
         if (!message.getAuthor().getId().equals("145064570237485056")) return;
 

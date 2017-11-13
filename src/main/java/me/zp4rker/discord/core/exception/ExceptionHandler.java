@@ -2,6 +2,7 @@ package me.zp4rker.discord.core.exception;
 
 import me.zp4rker.discord.core.logger.ZLogger;
 import me.zp4rker.discord.core.util.PBClient;
+import me.zp4rker.discord.core.util.PasteUtil;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

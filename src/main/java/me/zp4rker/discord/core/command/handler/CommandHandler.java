@@ -10,6 +10,7 @@ import net.dv8tion.jda.core.hooks.SubscribeEvent;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
 
 /**
  * The command handler class.
@@ -17,12 +18,15 @@ import java.util.HashMap;
  * @author ZP4RKER
  */
 public class CommandHandler {
+    
+    private final ExecutorService async;
 
     private final String prefix;
     private final HashMap<String, Command> commands = new HashMap<>();
 
-    public CommandHandler(String prefix) {
+    public CommandHandler(String prefix, ExecutorService async) {
         this.prefix = prefix;
+        this.async = async;
     }
 
     /**
@@ -43,10 +47,8 @@ public class CommandHandler {
 
         if (event.getChannelType().equals(ChannelType.PRIVATE) && !annotation.directMessages()) return;
         if (event.getChannelType().equals(ChannelType.TEXT) && !annotation.channelMessages()) return;
-        if (event.getAuthor().equals(event.getJDA().getSelfUser()) && !annotation.allowSelf()) return;
-        if (!event.getAuthor().equals(event.getJDA().getSelfUser()) && !annotation.allowOthers()) return;
 
-        Ryno.async.submit(() -> invokeMethod(command, getParameters(splitContent, command, event.getMessage(),
+        async.submit(() -> invokeMethod(command, getParameters(splitContent, command, event.getMessage(),
                 event.getJDA())));
     }
 

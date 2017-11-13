@@ -21,7 +21,7 @@ public class PBClient {
         PBClient.token = token;
     }
 
-    public static void start() {
+    public static void start(PBTask handler) {
         try {
             JSONArray pushes = getPushes("");
             if (pushes == null) return;
@@ -57,7 +57,8 @@ public class PBClient {
                     if (latest.getString("source_device_iden").equals("ujzkQhMD8LcsjAdCRXjVjU")) return;
 
                     // Handle recieved message
-                    //String msg = latest.getString("body");
+                    String msg = latest.getString("body");
+                    handler.handle(msg);
                 }
 
                 @Override

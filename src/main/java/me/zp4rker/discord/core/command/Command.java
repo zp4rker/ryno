@@ -19,10 +19,4 @@ public @interface Command {
 
     boolean channelMessages() default true;
 
-    boolean allowSelf() default false;
-
-    boolean allowOthers() default true;
-
-    boolean showInHelp() default true;
-
 }

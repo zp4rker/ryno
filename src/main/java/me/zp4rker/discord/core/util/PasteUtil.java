@@ -1,4 +1,4 @@
-package me.zp4rker.discord.core.exception;
+package me.zp4rker.discord.core.util;
 
 import me.zp4rker.discord.core.logger.ZLogger;
 import org.json.JSONObject;
@@ -12,9 +12,9 @@ import java.net.URL;
 /**
  * @author ZP4RKER
  */
-class PasteUtil {
+public class PasteUtil {
 
-    static String paste(String string) {
+    public static String paste(String string) {
         HttpsURLConnection con = null;
         try {
             URL url = new URL("https://hastebin.com/documents");

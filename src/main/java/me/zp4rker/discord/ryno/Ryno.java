@@ -2,9 +2,10 @@ package me.zp4rker.discord.ryno;
 
 import me.zp4rker.discord.core.command.handler.CommandHandler;
 import me.zp4rker.discord.core.exception.ExceptionHandler;
+import me.zp4rker.discord.core.util.PBClient;
+import me.zp4rker.discord.core.util.PBTask;
 import me.zp4rker.discord.ryno.db.Database;
 import me.zp4rker.discord.ryno.listeners.Ready;
-import me.zp4rker.discord.core.util.PBClient;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -16,7 +17,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Ryno {
@@ -28,8 +28,6 @@ public class Ryno {
     public static Instant startTime;
 
     public static Color embedColour = new Color(173, 69, 178);
-
-    public static ExecutorService async = Executors.newCachedThreadPool();
 
     public static void main(String[] args) throws Exception {
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
@@ -49,7 +47,7 @@ public class Ryno {
 
         PBClient.setToken(pushbulletToken);
 
-        handler = new CommandHandler("$");
+        handler = new CommandHandler("$", Executors.newCachedThreadPool());
 
         jda = new JDABuilder(AccountType.BOT).setToken(discordToken)
                 .setEventManager(new AnnotatedEventManager())
