@@ -17,7 +17,6 @@ public class Database {
             openConnection();
             connection = true;
         } catch (Exception e) {
-            e.printStackTrace();
             connection = false;
         } finally {
             closeConnection();
