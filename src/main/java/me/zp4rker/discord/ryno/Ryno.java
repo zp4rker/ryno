@@ -31,7 +31,7 @@ public class Ryno {
     public static ExecutorService async = Executors.newCachedThreadPool();
 
     public static void main(String[] args) throws Exception {
-        //Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
         if (!Config.valid()) {
             System.out.println("Config missing.");
