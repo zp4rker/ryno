@@ -56,7 +56,7 @@ public class Ryno {
     public static class Config {
 
         public static boolean valid() {
-            System.out.println(Arrays.toString(new File("bots/ryno").listFiles()));
+            System.out.println(Arrays.toString(new File(".").listFiles()));
             JSONObject config = readFile(new File(getDir(), "config.json"));
             return config.keySet().containsAll(Arrays.asList("discord-token", "pushbullet-token", "db-host", "db-name",
                     "db-username", "db-password"));
