@@ -2,6 +2,7 @@ package me.zp4rker.discord.ryno;
 
 import me.zp4rker.discord.core.command.handler.CommandHandler;
 import me.zp4rker.discord.core.exception.ExceptionHandler;
+import me.zp4rker.discord.ryno.db.Database;
 import me.zp4rker.discord.ryno.listeners.Ready;
 import me.zp4rker.discord.core.util.PBClient;
 import net.dv8tion.jda.core.AccountType;
@@ -35,6 +36,11 @@ public class Ryno {
 
         if (!Config.valid()) {
             System.out.println("Config missing.");
+            return;
+        }
+
+        if (!Database.status()) {
+            System.out.println("Database connection unsuccessful.");
             return;
         }
 
