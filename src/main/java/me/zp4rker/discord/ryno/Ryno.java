@@ -55,15 +55,14 @@ public class Ryno {
 
     public static class Config {
 
-        public static boolean valid() {
-            System.out.println(Arrays.toString(new File(".").listFiles()));
-            JSONObject config = readFile(new File(getDir(), "config.json"));
+        static boolean valid() {
+            JSONObject config = readFile(new File("config.json"));
             return config.keySet().containsAll(Arrays.asList("discord-token", "pushbullet-token", "db-host", "db-name",
                     "db-username", "db-password"));
         }
 
         public static String val(String key) {
-            return readFile(new File(getDir(), "config.json")).getString(key);
+            return readFile(new File("config.json")).getString(key);
         }
 
         private static JSONObject readFile(File file) {
@@ -80,10 +79,6 @@ public class Ryno {
                 e.printStackTrace();
             }
             return data.isEmpty() ? new JSONObject() : new JSONObject(data);
-        }
-
-        private static File getDir() {
-            return new File(Ryno.class.getProtectionDomain().getCodeSource().getLocation().toString()).getParentFile();
         }
 
     }
