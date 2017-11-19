@@ -5,11 +5,13 @@ import me.zp4rker.discord.core.logger.ZLogger;
 import me.zp4rker.discord.ryno.Ryno;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
 
     private static Connection con = null;
-    private static PreparedStatement statement = null;
+    private static List<PreparedStatement> statements = new ArrayList<>();
 
     public static boolean status() {
         boolean connection;
@@ -39,9 +41,11 @@ public class Database {
                 con.close();
                 con = null;
             }
-            if (statement != null) {
-                statement.close();
-                statement = null;
+            if (!statements.isEmpty()) {
+                for (PreparedStatement statement : statements) {
+                    statement.close();
+                }
+                statements.clear();
             }
         } catch (SQLException e) {
             ExceptionHandler.handleException("Database connection close", e);
@@ -49,7 +53,7 @@ public class Database {
     }
 
     public static ResultSet query(String query, Object... args) throws SQLException {
-        statement = con.prepareStatement(query);
+        PreparedStatement statement = con.prepareStatement(query);
 
         int i = 1;
         for (Object arg : args) {
@@ -59,11 +63,14 @@ public class Database {
 
         ZLogger.debug("Statement null: " + (statement == null));
 
-        return statement.executeQuery();
+        ResultSet resultSet = statement.executeQuery();
+        statements.add(statement);
+
+        return resultSet;
     }
 
     public static void update(String query, Object... args) throws SQLException {
-        statement = con.prepareStatement(query);
+        PreparedStatement statement = con.prepareStatement(query);
 
         int i = 1;
         for (Object arg : args) {
@@ -72,12 +79,16 @@ public class Database {
         }
 
         statement.executeUpdate();
+        statements.add(statement);
     }
 
     public static ResultSet query(String query) throws SQLException {
-        statement = con.prepareStatement(query);
+        PreparedStatement statement = con.prepareStatement(query);
 
-        return statement.executeQuery();
+        ResultSet resultSet = statement.executeQuery();
+        statements.add(statement);
+
+        return resultSet;
     }
 
 }
