@@ -21,7 +21,6 @@ public class Invite {
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor("Invite links", null, message.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setColor(Ryno.embedColour)
-                .setFooter("Made by ZP4RKER#3333", null)
                 .setDescription(desc).build();
 
         message.getChannel().sendMessage(embed).queue();
