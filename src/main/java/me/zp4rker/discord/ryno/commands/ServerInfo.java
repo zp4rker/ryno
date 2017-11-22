@@ -35,8 +35,8 @@ public class ServerInfo {
 
         MessageEmbed embed = new EmbedBuilder()
                 .setAuthor(name).setThumbnail(guild.getIconUrl()).setColor(Ryno.embedColour)
-                .addField("Owner", owner, true).addField("Region", region, true).addBlankField(false)
-                .addField("Members", "**Users:** " + users + "\n**Bots:** " + bots, true)
+                .addField("Owner", owner, true).addField("Region", region, true)
+                .addField("Members", "Users: " + users + "\nBots: " + bots, true)
                 .addField("Channels", "**Categories:** " + categories + "\n**Text:** " + textChannels + "\n**Voice:** " + voiceChannels, true)
                 .addField("Roles", roles + "", true).addField("Emotes", emotes + "", true)
                 .setFooter("ID: " + id, null).build();
