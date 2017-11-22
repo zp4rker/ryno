@@ -6,7 +6,6 @@ import me.zp4rker.discord.core.util.PBClient;
 import me.zp4rker.discord.ryno.db.Database;
 import me.zp4rker.discord.ryno.listeners.Ready;
 import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.hooks.AnnotatedEventManager;
 import org.json.JSONObject;
@@ -22,7 +21,6 @@ public class Ryno {
 
     public static final String VERSION = "v1.0";
 
-    private static JDA jda;
     public static CommandHandler handler;
     public static Instant startTime;
 
@@ -48,7 +46,7 @@ public class Ryno {
 
         handler = new CommandHandler("$", Executors.newCachedThreadPool());
 
-        jda = new JDABuilder(AccountType.BOT).setToken(discordToken)
+        new JDABuilder(AccountType.BOT).setToken(discordToken)
                 .setEventManager(new AnnotatedEventManager())
                 .setBulkDeleteSplittingEnabled(false)
                 .addEventListener(handler)
