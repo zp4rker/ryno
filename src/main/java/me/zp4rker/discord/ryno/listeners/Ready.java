@@ -3,10 +3,7 @@ package me.zp4rker.discord.ryno.listeners;
 import me.zp4rker.discord.core.command.handler.CommandHandler;
 import me.zp4rker.discord.core.logger.ZLogger;
 import me.zp4rker.discord.ryno.Ryno;
-import me.zp4rker.discord.ryno.commands.Info;
-import me.zp4rker.discord.ryno.commands.Invite;
-import me.zp4rker.discord.ryno.commands.Ping;
-import me.zp4rker.discord.ryno.commands.Restart;
+import me.zp4rker.discord.ryno.commands.*;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.SubscribeEvent;
@@ -39,6 +36,7 @@ public class Ready {
         handler.registerCommand(new Ping());
         handler.registerCommand(new Info());
         handler.registerCommand(new Invite());
+        handler.registerCommand(new ServerInfo());
     }
 
 }
