@@ -1,6 +1,7 @@
 package me.zp4rker.discord.ryno.commands;
 
 import me.zp4rker.discord.core.command.Command;
+import me.zp4rker.discord.ryno.Ryno;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
@@ -33,7 +34,7 @@ public class ServerInfo {
         int emotes = guild.getEmotes().size();
 
         MessageEmbed embed = new EmbedBuilder()
-                .setAuthor(name, null, guild.getIconUrl())
+                .setAuthor(name).setThumbnail(guild.getIconUrl()).setColor(Ryno.embedColour)
                 .addField("Owner", owner, true).addField("Region", region, true).addBlankField(false)
                 .addField("Members", "**Users:** " + users + "\n**Bots:** " + bots, true)
                 .addField("Channels", "**Categories:** " + categories + "\n**Text:** " + textChannels + "\n**Voice:** " + voiceChannels, true)
