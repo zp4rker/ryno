@@ -4,51 +4,42 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.zp4rker.discord</groupId>
+    <groupId>co.zpdev.bots</groupId>
     <artifactId>ryno</artifactId>
     <version>1.0</version>
 
     <repositories>
         <repository>
-            <name>bintray</name>
-            <id>bintray-dv8fromtheworld-maven</id>
-            <url>https://dl.bintray.com/dv8fromtheworld/maven</url>
-        </repository>
-        <repository>
-            <name>bintray-central</name>
-            <id>central</id>
-            <url>https://jcenter.bintray.com</url>
+            <id>zpdev</id>
+            <url>https://cdn.rawgit.com/zpdev/maven/master</url>
         </repository>
     </repositories>
 
     <dependencies>
-        <!-- JDA -->
         <dependency>
-            <groupId>net.dv8tion</groupId>
-            <artifactId>JDA</artifactId>
-            <version>LATEST</version>
-        </dependency>
-        <!-- MySQL JDBC -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.6</version>
-        </dependency>
-        <!-- Java websocket -->
-        <dependency>
-            <groupId>org.java-websocket</groupId>
-            <artifactId>Java-WebSocket</artifactId>
-            <version>1.3.5</version>
+            <groupId>co.zpdev.core</groupId>
+            <artifactId>discord-core</artifactId>
+            <version>1.2.7</version>
         </dependency>
     </dependencies>
 
     <build>
         <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.*</include>
+                </includes>
+                <directory>${basedir}/src/main/resources</directory>
+                <targetPath>.</targetPath>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.6.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -56,8 +47,21 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <mainClass>co.zpdev.bots.ryno.Ryno</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.4.3</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -65,28 +69,11 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <minimizeJar>false</minimizeJar>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <artifactSet>
-                                <excludes>
-                                    <!-- Exclude jars -->
-                                    <exclude>org.hamcrest:hamcrest-core</exclude>
-                                </excludes>
-                            </artifactSet>
+                            <minimizeJar>true</minimizeJar>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>me.zp4rker.discord.ryno.Ryno</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
             </plugin>
         </plugins>
     </build>
